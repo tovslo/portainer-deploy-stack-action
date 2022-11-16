@@ -71,6 +71,8 @@ export class PortainerClient {
       baseURL: url.toString()
     })
 
+    core.debug(`portainer client constructor url: ${url.toString()}`)
+
     this.client.interceptors.request.use(
       (config: AxiosRequestConfig): AxiosRequestConfig => {
         if (this.token) {
@@ -85,6 +87,9 @@ export class PortainerClient {
       response => response,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       async (error: any) => {
+        core.debug(
+          `portainer client constructor error response: ${error.response}`
+        )
         return Promise.reject(
           new PortainerError(
             error.response.status,
@@ -111,6 +116,7 @@ export class PortainerClient {
   }
 
   async login(user: string, pass: string): Promise<void> {
+    core.debug(`portainer start login`)
     const response = await this.client.post<LoginResponse>('/auth', {
       username: user,
       password: pass

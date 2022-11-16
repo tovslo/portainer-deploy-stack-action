@@ -237,6 +237,7 @@ class PortainerClient {
         this.client = axios_1.default.create({
             baseURL: url.toString()
         });
+        core.debug(`portainer client constructor url: ${url.toString()}`);
         this.client.interceptors.request.use((config) => {
             if (this.token) {
                 config.headers['Authorization'] = `Bearer ${this.token}`;
@@ -246,6 +247,7 @@ class PortainerClient {
         this.client.interceptors.response.use(response => response, 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (error) => __awaiter(this, void 0, void 0, function* () {
+            core.debug(`portainer client constructor error response: ${error.response}`);
             return Promise.reject(new PortainerError(error.response.status, error.response.data.message, error.response.data.details));
         }));
     }
@@ -262,6 +264,7 @@ class PortainerClient {
     }
     login(user, pass) {
         return __awaiter(this, void 0, void 0, function* () {
+            core.debug(`portainer start login`);
             const response = yield this.client.post('/auth', {
                 username: user,
                 password: pass
