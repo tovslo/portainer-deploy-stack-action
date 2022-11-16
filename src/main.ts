@@ -6,6 +6,9 @@ async function run(): Promise<void> {
   try {
     const cfg = config.parse()
     core.debug(`parsed config: ${cfg}`)
+    core.debug(`cfg.portainer.url: ${cfg.portainer.url}`)
+    core.debug(`cfg.portainer.username: ${cfg.portainer.username}`)
+    core.debug(`cfg.portainer.password: ${cfg.portainer.password}`)
 
     core.startGroup('Auth')
     const portainer = new PortainerClient(cfg.portainer.url)
