@@ -1,5 +1,6 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios'
 import {CustomError} from 'ts-custom-error'
+import * as core from '@actions/core'
 
 interface LoginResponse {
   jwt: string
@@ -114,7 +115,7 @@ export class PortainerClient {
       username: user,
       password: pass
     })
-
+    core.debug(`portainer login response: ${response}`)
     this.token = response.data.jwt
   }
 
