@@ -247,8 +247,8 @@ class PortainerClient {
         this.client.interceptors.response.use(response => response, 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (error) => __awaiter(this, void 0, void 0, function* () {
-            core.debug(`portainer client constructor error response: ${error.response}`);
-            return Promise.reject(new PortainerError(error.response.status, error.response.data.message, error.response.data.details));
+            core.debug(`portainer client constructor error response: ${error}`);
+            return Promise.reject(new PortainerError(error ? error.response.status : 'status', error ? error.response.data.message : 'message', error ? error.response.data.details : 'details'));
         }));
     }
     get isAuthorized() {

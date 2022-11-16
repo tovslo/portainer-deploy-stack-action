@@ -87,14 +87,12 @@ export class PortainerClient {
       response => response,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       async (error: any) => {
-        core.debug(
-          `portainer client constructor error response: ${error.response}`
-        )
+        core.debug(`portainer client constructor error response: ${error}`)
         return Promise.reject(
           new PortainerError(
-            error.response.status,
-            error.response.data.message,
-            error.response.data.details
+            error ? error.response.status : 'status',
+            error ? error.response.data.message : 'message',
+            error ? error.response.data.details : 'details'
           )
         )
       }
