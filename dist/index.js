@@ -333,7 +333,7 @@ class PortainerClient {
                     endpointId: patch.endpointId
                 }
             });
-            core.debug(`response: ${response}`);
+            core.debug(`response: ${response.status}: ${response.statusText}. data: ${response.data}`);
         });
     }
     createStack(input) {
