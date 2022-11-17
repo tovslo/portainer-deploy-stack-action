@@ -167,12 +167,14 @@ export class PortainerClient {
   }
 
   async updateStack(patch: PatchStack): Promise<void> {
+    core.debug(`portainer start updateStack`)
     const env = Object.entries(patch.vars).map(([k, v]) => ({
       name: k,
       value: v
     }))
+    core.debug(`portainer updateStack env: ${env}`)
 
-    await this.client.put(
+    const response = await this.client.put(
       `/stacks/${patch.id}`,
       {
         StackFileContent: patch.stack,
@@ -185,6 +187,7 @@ export class PortainerClient {
         }
       }
     )
+    core.debug(`response: ${response}`)
   }
 
   async createStack(input: InputStack): Promise<Stack> {

@@ -318,11 +318,13 @@ class PortainerClient {
     }
     updateStack(patch) {
         return __awaiter(this, void 0, void 0, function* () {
+            core.debug(`portainer start updateStack`);
             const env = Object.entries(patch.vars).map(([k, v]) => ({
                 name: k,
                 value: v
             }));
-            yield this.client.put(`/stacks/${patch.id}`, {
+            core.debug(`portainer updateStack env: ${env}`);
+            const response = yield this.client.put(`/stacks/${patch.id}`, {
                 StackFileContent: patch.stack,
                 Env: env,
                 Prune: patch.prune
@@ -331,6 +333,7 @@ class PortainerClient {
                     endpointId: patch.endpointId
                 }
             });
+            core.debug(`response: ${response}`);
         });
     }
     createStack(input) {
