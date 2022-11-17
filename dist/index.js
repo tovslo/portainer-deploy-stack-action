@@ -327,7 +327,8 @@ class PortainerClient {
             const response = yield this.client.put(`/stacks/${patch.id}`, {
                 StackFileContent: patch.stack,
                 Env: env,
-                Prune: patch.prune
+                Prune: patch.prune,
+                PullImage: true
             }, {
                 params: {
                     endpointId: patch.endpointId

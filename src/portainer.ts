@@ -179,7 +179,8 @@ export class PortainerClient {
       {
         StackFileContent: patch.stack,
         Env: env,
-        Prune: patch.prune
+        Prune: patch.prune,
+        PullImage: true
       },
       {
         params: {
